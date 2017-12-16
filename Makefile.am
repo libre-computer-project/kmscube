@@ -43,6 +43,7 @@ kmscube_SOURCES = \
 	common.c \
 	common.h \
 	cube-smooth.c \
+	cube-uniform.c \
 	cube-tex.c \
 	drm-atomic.c \
 	drm-common.c \

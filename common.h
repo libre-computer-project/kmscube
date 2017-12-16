@@ -102,6 +102,7 @@ int link_program(unsigned program);
 
 enum mode {
 	SMOOTH,        /* smooth-shaded */
+	UNIFORM,       /* solid cube */
 	RGBA,          /* single-plane RGBA */
 	NV12_2IMG,     /* NV12, handled as two textures and converted to RGB in shader */
 	NV12_1IMG,     /* NV12, imported as planar YUV eglimg */
@@ -109,6 +110,7 @@ enum mode {
 };
 
 const struct egl * init_cube_smooth(const struct gbm *gbm);
+const struct egl * init_cube_uniform(const struct gbm *gbm);
 const struct egl * init_cube_tex(const struct gbm *gbm, enum mode mode);
 
 #ifdef HAVE_GST

@@ -63,6 +63,7 @@ static void usage(const char *name)
 			"    -D, --device=DEVICE      use the given device\n"
 			"    -M, --mode=MODE          specify mode, one of:\n"
 			"        smooth    -  smooth shaded cube (default)\n"
+			"        uniform   -  solid shaded cube (default)\n"
 			"        rgba      -  rgba textured cube\n"
 			"        nv12-2img -  yuv textured (color conversion in shader)\n"
 			"        nv12-1img -  yuv textured (single nv12 texture)\n"
@@ -96,6 +97,8 @@ int main(int argc, char *argv[])
 		case 'M':
 			if (strcmp(optarg, "smooth") == 0) {
 				mode = SMOOTH;
+			} else if (strcmp(optarg, "uniform") == 0) {
+				mode = UNIFORM;
 			} else if (strcmp(optarg, "rgba") == 0) {
 				mode = RGBA;
 			} else if (strcmp(optarg, "nv12-2img") == 0) {
@@ -139,6 +142,8 @@ int main(int argc, char *argv[])
 
 	if (mode == SMOOTH)
 		egl = init_cube_smooth(gbm);
+	else if (mode == UNIFORM)
+		egl = init_cube_uniform(gbm);
 	else if (mode == VIDEO)
 		egl = init_cube_video(gbm, video);
 	else
