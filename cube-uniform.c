@@ -38,6 +38,8 @@ struct {
 	GLuint vbo;
 	GLuint positionsoffset, colorsoffset, normalsoffset;
 	GLuint anothercolor;
+	GLuint difftest;
+	float test;
 } gl;
 
 static const GLfloat vVertices[] = {
@@ -169,12 +171,13 @@ static const char *fragment_shader_source =
 		"                                   \n"
 		"varying vec4 vVaryingColor;        \n"
 		"varying float diff;                \n"
+		"uniform float diffTest;            \n"
 		"uniform vec4 uAnotherColor;        \n"
 		"                                   \n"
 		"void main()                        \n"
 		"{                                  \n"
 		"    //gl_FragColor = vVaryingColor;  \n"
-		"    gl_FragColor = vec4(diff * uAnotherColor.rgba);  \n"
+		"    gl_FragColor = vec4(diff * diffTest * uAnotherColor.rgba);  \n"
 		"}                                  \n";
 
 
@@ -224,6 +227,7 @@ static void draw_cube_uniform(unsigned i)
 	color[2] = 0.0;
 	color[3] = 1.0;
 	glUniform4fv(gl.anothercolor, 1, color);
+	glUniform1f(gl.difftest, gl.test);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glDrawArrays(GL_TRIANGLE_STRIP, 4, 4);
@@ -233,7 +237,7 @@ static void draw_cube_uniform(unsigned i)
 	glDrawArrays(GL_TRIANGLE_STRIP, 20, 4);
 }
 
-const struct egl * init_cube_uniform(const struct gbm *gbm)
+const struct egl * init_cube_uniform(const struct gbm *gbm, float test)
 {
 	int ret;
 
@@ -263,6 +267,8 @@ const struct egl * init_cube_uniform(const struct gbm *gbm)
 	gl.modelviewprojectionmatrix = glGetUniformLocation(gl.program, "modelviewprojectionMatrix");
 	gl.normalmatrix = glGetUniformLocation(gl.program, "normalMatrix");
 	gl.anothercolor = glGetUniformLocation(gl.program, "uAnotherColor");
+	gl.difftest = glGetUniformLocation(gl.program, "diffTest");
+	gl.test = test;
 
 	glViewport(0, 0, gbm->width, gbm->height);
 	glEnable(GL_CULL_FACE);

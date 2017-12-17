@@ -110,7 +110,7 @@ enum mode {
 };
 
 const struct egl * init_cube_smooth(const struct gbm *gbm);
-const struct egl * init_cube_uniform(const struct gbm *gbm);
+const struct egl * init_cube_uniform(const struct gbm *gbm, float test);
 const struct egl * init_cube_tex(const struct gbm *gbm, enum mode mode);
 
 #ifdef HAVE_GST

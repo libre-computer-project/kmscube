@@ -51,6 +51,7 @@ static const struct option longopts[] = {
 	{"mode",   required_argument, 0, 'M'},
 	{"modifier", required_argument, 0, 'm'},
 	{"video",  required_argument, 0, 'V'},
+	{"float",  required_argument, 0, 'f'},
 	{0, 0, 0, 0}
 };
 
@@ -69,6 +70,7 @@ static void usage(const char *name)
 			"        nv12-1img -  yuv textured (single nv12 texture)\n"
 			"    -m, --modifier=MODIFIER  hardcode the selected modifier\n"
 			"    -V, --video=FILE         video textured cube\n",
+			"    -f, --float=value        float value used for uniform test\n",
 			name);
 }
 
@@ -80,6 +82,7 @@ int main(int argc, char *argv[])
 	uint64_t modifier = DRM_FORMAT_MOD_INVALID;
 	int atomic = 0;
 	int opt;
+	float test = 1.0;
 
 #ifdef HAVE_GST
 	gst_init(&argc, &argv);
@@ -93,6 +96,9 @@ int main(int argc, char *argv[])
 			break;
 		case 'D':
 			device = optarg;
+			break;
+		case 'f':
+			test = (float)atof(optarg);
 			break;
 		case 'M':
 			if (strcmp(optarg, "smooth") == 0) {
@@ -143,7 +149,7 @@ int main(int argc, char *argv[])
 	if (mode == SMOOTH)
 		egl = init_cube_smooth(gbm);
 	else if (mode == UNIFORM)
-		egl = init_cube_uniform(gbm);
+		egl = init_cube_uniform(gbm, test);
 	else if (mode == VIDEO)
 		egl = init_cube_video(gbm, video);
 	else
