@@ -177,7 +177,7 @@ static const char *fragment_shader_source =
 		"void main()                        \n"
 		"{                                  \n"
 		"    //gl_FragColor = vVaryingColor;  \n"
-		"    gl_FragColor = vec4(diff * diffTest * uAnotherColor.rgba);  \n"
+		"    gl_FragColor = vec4(diffTest * uAnotherColor.rgba);  \n"
 		"}                                  \n";
 
 
