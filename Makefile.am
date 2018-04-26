@@ -53,6 +53,7 @@ kmscube_SOURCES = \
 	esUtil.h \
 	frame-512x512-NV12.c \
 	frame-512x512-RGBA.c \
+	frame-500x500-RGBA.c \
 	kmscube.c
 
 if ENABLE_GST

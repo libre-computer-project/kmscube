@@ -211,7 +211,7 @@ static const char *fragment_shader_source_2img =
 		"    gl_FragColor = vVaryingColor * (yuv * csc);\n"
 		"}                                              \n";
 
-static const uint32_t texw = 512, texh = 512;
+static const uint32_t texw = 500, texh = 500;
 
 static int init_tex_rgba(void)
 {
@@ -223,8 +223,8 @@ static int init_tex_rgba(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	extern const uint32_t raw_512x512_rgba[];
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texw, texh, 0, GL_RGBA, GL_UNSIGNED_BYTE, raw_512x512_rgba); 
+	extern const uint32_t raw_500x500_rgba[];
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, texw, texh, 0, GL_RGBA, GL_UNSIGNED_BYTE, raw_500x500_rgba); 
 
 	return 0;
 }
