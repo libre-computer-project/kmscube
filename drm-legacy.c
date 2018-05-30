@@ -77,7 +77,7 @@ static int legacy_run(const struct gbm *gbm, const struct egl *egl)
 		struct gbm_bo *next_bo;
 		int waiting_for_flip = 1;
 
-		egl->draw(0);
+		egl->draw(i++);
 
 		eglSwapBuffers(egl->display, egl->surface);
 		next_bo = gbm_surface_lock_front_buffer(gbm->surface);
